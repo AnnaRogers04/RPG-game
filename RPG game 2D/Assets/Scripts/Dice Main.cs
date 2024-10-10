@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine;
+
 public class BellCurveRandomGenerator : MonoBehaviour
 {
     public int samplecount = 1000;
 
-    void start()
+    void Start()
     {
         for(int i = 0; i <samplecount; i++)
         {
             int randomValue = GenerateBellCurveRandom(1, 6, 2);
-            debug.log(randomValue);
+      
 
         } 
         
@@ -20,12 +20,12 @@ public class BellCurveRandomGenerator : MonoBehaviour
 
     int GenerateBellCurveRandom(int min, int max, float peak)
     {
-        float randomValue = randomValue.range(0f, 1f);
-        float bellCurveValue = mathf.Pow(randomValue, 2);
+        float randomValue = Random.Range(0f, 1f);
+        float bellCurveValue = Mathf.Pow(randomValue, 2);
 
 
-        float ScaledValue = Mathf.lerp(min, max, bellCurveValue);
-        int finalValue = mathf.Clamp(mathf,RoundToInt(ScaledValue), min, max);
+        float ScaledValue = Mathf.Lerp(min, max, bellCurveValue);
+        int finalValue = Mathf.Clamp(Mathf.RoundToInt(ScaledValue), min, max);
 
         return finalValue;
 
