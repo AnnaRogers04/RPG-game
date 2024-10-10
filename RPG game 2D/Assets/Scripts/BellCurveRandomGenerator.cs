@@ -12,6 +12,7 @@ public class BellCurveRandomGenerator : MonoBehaviour
         for(int i = 0; i <samplecount; i++)
         {
             int randomValue = GenerateBellCurveRandom(1, 6, 2);
+            Debug.Log("Generated Value" + randomValue);
       
 
         } 
