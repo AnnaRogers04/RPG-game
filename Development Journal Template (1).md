@@ -34,13 +34,13 @@ To create a non-uniform random generator i need to:
 
 - Create an aspect to choose how many dice roll at once
 - Have a way for the dice to reset after the round
+ 
 
 ```
 ### Concept
 ```
 For my concept I would like to use 2D versions of the dice needed to roll You click on the dice you want to roll the number it rolls appearing underneath. There will be a re-roll button on the screen which resets the code.
-
-Have it so even numbers can heal/dodge attacks and different odd numbers can deal different damage.
+Id like to create a labyrinth based 2D game where you come across enemys as you progess. You have a choice to roll 3 dice. An even number means you fight the enemy your up against, an odd number lets you choosse if you fight or flee. Fighting can make you become stronger but if you die your game resets.
 
 
 ```
