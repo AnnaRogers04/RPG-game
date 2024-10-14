@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BellCurveRandomGenerator : MonoBehaviour
 {
-    public int sampleCount = 1000;
+    public int sampleCount = 10;
 
     private void Start()
     {
