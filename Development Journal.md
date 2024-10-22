@@ -35,22 +35,18 @@ To create a non-uniform random generator i need to:
 if you right click on the dice, the dice rolls.
 - Have a way for the dice to reset after the round set the reset button to restart the code.
 -create option buttons to select fight or flee buttons. 
- 
 
 ```
 ### Concept
 ```
 For my concept I would like to use 2D versions of the dice needed to roll. You click on the dice ans it will roll with the numbers appearing below. There will be a re-roll button on the screen which resets the code.
-Id like to create a labyrinth based 2D game where you come across enemys as you progess. You will roll a dice against all the enemys. An even number means you fight the enemy your up against, an odd number lets you choosse if you fight or flee. Fighting can make you become stronger but if you die your game resets.
-
-
+Id like to create a labyrinth based 2D game where you come across enemys as you progess. You will roll a dice against all the enemys. An even number means you fight the enemy your up against, an odd number lets you choosse if you fight or flee. Fighting can make you become stronger but if you die your game resets. This game is based on black mirror bandisnatch the netflix playable film.
 ```
-
 #### Sources
 
-- An opening paragraph about the source stating the author, developer or organisation, this paragraph should explain the source's influence, credentials, critical reception, awards, reputation or any issues with the source. For example, if the source is not reputable. If the source is a game, the issues that occurred during development or if had a poor launch.
-- List the aspects analysed in reference to the current task.
-- An ending paragraph stating what you enjoyed or disliked, what you agreed with or not agree with.
+https://stackoverflow.com/questions/5816985/    
+I used stack overflow as an aid for my Bell Curve code. The user 'Mike T' or 'user735897' was the user that uploaded the code that i used to help me understand the code. The helped me acknowledge that the code i was attempting to use wasnt a bell curve but just a random generator.
+While his code helped, it took a long time for me to actually read the code due to the heavy amounts of over commenting on the script he provided.
 
 ```Markdown
 # Documentation
