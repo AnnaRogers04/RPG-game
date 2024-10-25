@@ -1,20 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    // declare some variables such as current health, max health, isdead maybe?
-    // TMP_Slider for health bar
+    public float currentHealth, maxHealth = 100f;
+    public Slider healthBar;
+    public GameObject fillObject;
 
-    // take damage method
-    // currenthealth -= amount;
-    // if the player health is less than or = 0
-        // it be dead
-    // update health bar
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+        healthBar.value  = currentHealth / maxHealth;
+    }    
 
-    // add health method
-    // currenthealth += amount
-    // if player is over max, set health it max
-    // update health bar.value (0,1)
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0) Die();
+        healthBar.value  = currentHealth / maxHealth;
+    }
+
+    public void AddHealth(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        healthBar.value = currentHealth / maxHealth;
+    }
+
+    private void Die()
+    {
+        fillObject.SetActive(false);
+        // TODO: Stuff to happen when this dies
+    }
 }
