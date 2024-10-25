@@ -14,7 +14,8 @@ public class BellCurveRandomGenerator : MonoBehaviour
              int D6Dice = GenerateBellCurveRandom(1, 6, 2); 
              int D12Dice = GenerateBellCurveRandom(1, 12, 8);
              int D20Dice = GenerateBellCurveRandom(1, 20, 12);
-             Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}");
+             int total = D6Dice + D12Dice + D20Dice;
+             Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}, Total: {total}");
         } 
     }
     private int GenerateBellCurveRandom(float min, float max, float peak)
