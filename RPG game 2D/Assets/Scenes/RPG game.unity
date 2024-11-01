@@ -4218,6 +4218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 169928979}
   - component: {fileID: 169928978}
+  - component: {fileID: 169928980}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Untagged
@@ -4292,6 +4293,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &169928980
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169928977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bcd26cf7c12c3f4fa76756655130b78, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &196271494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14369,6 +14391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 749581813}
   - component: {fileID: 749581812}
+  - component: {fileID: 749581814}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Untagged
@@ -14443,6 +14466,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &749581814
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749581811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0aa52f65384ed964d8a9366fcafc6e4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &751513034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16200,12 +16244,12 @@ PrefabInstance:
     - target: {fileID: 215343985564415219, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0491
+      value: 0.307
       objectReference: {fileID: 0}
     - target: {fileID: 215343985564415219, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.041
+      value: 0.272
       objectReference: {fileID: 0}
     - target: {fileID: 1545926687270224377, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
@@ -25231,6 +25275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1241570591}
   - component: {fileID: 1241570590}
+  - component: {fileID: 1241570592}
   m_Layer: 0
   m_Name: Enemy 4
   m_TagString: Untagged
@@ -25305,6 +25350,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1241570592
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241570589}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2908a4ebf7d86dc499a25dc940b2a1a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1243234462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26939,7 +27005,7 @@ Animator:
   m_GameObject: {fileID: 1464433592}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ccea6ce74fba1dc4fa19ccd720f73238, type: 2}
+  m_Controller: {fileID: 9100000, guid: 85a2cad4a96b18946af94ed44712da99, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
