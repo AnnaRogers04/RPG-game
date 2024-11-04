@@ -20,22 +20,18 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
              PlayerAnim.SetBool(ParameterName, true);
-
         }
         else
         {
-
              PlayerAnim.SetBool(ParameterName, false);
         }
         if(Input.GetAxis("Horizontal") >= 0 )
         {
              spriteRenderer.flipX = false;
-
         }
          if(Input.GetAxis("Horizontal") <= 0 )
         {
              spriteRenderer.flipX = true;
-
         }
 
     }
