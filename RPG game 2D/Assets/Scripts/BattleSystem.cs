@@ -8,6 +8,7 @@ public class BattleSystem : MonoBehaviour
     public BellCurveRandomGenerator bcrg;
     public void SetEnemyTarget(Health newEnemy) => enemyHealth = newEnemy;
 
+
     public void Battle()
     {
         enemyHealth.TakeDamage(bcrg.GenerateBellCurveRandom(1, 6, 3));
