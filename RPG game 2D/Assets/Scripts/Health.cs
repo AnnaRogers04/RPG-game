@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     public float currentHealth, maxHealth = 100f;
-    public Slider[] healthBar;
+    public Slider healthBar;
     public GameObject fillObject;
     public GameObject battleUI;
 
@@ -17,46 +17,34 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        if(healthBar[0] == null) return;
-        foreach(Slider s in healthBar)
-        {
-            s.value = currentHealth / maxHealth;
-        }
+        if(healthBar == null) return;
+        healthBar.value = currentHealth / maxHealth;
     }    
 
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0) Die();
-        foreach(Slider s in healthBar)
-        {
-            s.value = currentHealth / maxHealth;
-        }
+        healthBar.value = currentHealth / maxHealth;
     }
 
     public void AddHealth(float amount)
     {
         currentHealth += amount;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-        foreach(Slider s in healthBar)
-        {
-            s.value = currentHealth / maxHealth;
-        }
+        healthBar.value = currentHealth / maxHealth;
     }
 
     private void Die()
     {
-        fillObject.SetActive(false);
+        //fillObject.SetActive(false);
         battleUI.SetActive(false);
     }
 
     public void ResetHealth()
     {
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-        foreach(Slider s in healthBar)
-        {
-            s.value = currentHealth / maxHealth;
-        }
+        healthBar.value = currentHealth / maxHealth;
     }
 
     private void Update()

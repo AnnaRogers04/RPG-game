@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             bs.enemyHealth = _health;
             image.sprite = enemyImg;
             battleUI.SetActive(true);
-            _health.healthBar[0] = battleSlider;
+            _health.healthBar = battleSlider;
             _health.ResetHealth();
             battleSystem.enemyHealth = _health;
         }

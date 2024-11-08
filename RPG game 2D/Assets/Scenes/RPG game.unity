@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &10531364 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4295852219200599536, guid: 79124ddabe6e41d4f8dc392860fe3c56,
-    type: 3}
-  m_PrefabInstance: {fileID: 934895904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &15898338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4475,9 +4469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 20
-  healthBar:
-  - {fileID: 0}
-  fillObject: {fileID: 10531364}
+  healthBar: {fileID: 2112472381}
+  fillObject: {fileID: 0}
   battleUI: {fileID: 26697474}
   isPlayer: 0
   restart: {fileID: 0}
@@ -15027,9 +15020,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 20
-  healthBar:
-  - {fileID: 0}
-  fillObject: {fileID: 10531364}
+  healthBar: {fileID: 2112472381}
+  fillObject: {fileID: 0}
   battleUI: {fileID: 26697474}
   isPlayer: 0
   restart: {fileID: 0}
@@ -15544,18 +15536,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 815035968}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &818512530 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8716721393857752656, guid: 79124ddabe6e41d4f8dc392860fe3c56,
-    type: 3}
-  m_PrefabInstance: {fileID: 934895904}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &822909573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16894,8 +16874,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1583004731540538691, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1469693762}
+    - target: {fileID: 1583004731540538691, guid: 79124ddabe6e41d4f8dc392860fe3c56,
+        type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583004731540538691, guid: 79124ddabe6e41d4f8dc392860fe3c56,
+        type: 3}
+      propertyPath: fillObject
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1583004731540538691, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
@@ -16906,7 +16896,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar.Array.data[0]
       value: 
-      objectReference: {fileID: 818512530}
+      objectReference: {fileID: 0}
     - target: {fileID: 1583004731540538691, guid: 79124ddabe6e41d4f8dc392860fe3c56,
         type: 3}
       propertyPath: healthBar.Array.data[1]
@@ -17059,7 +17049,8 @@ PrefabInstance:
       value: 0.385
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2117860206913143839, guid: 79124ddabe6e41d4f8dc392860fe3c56, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1828094209563584032, guid: 79124ddabe6e41d4f8dc392860fe3c56,
@@ -26584,9 +26575,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 20
-  healthBar:
-  - {fileID: 0}
-  fillObject: {fileID: 10531364}
+  healthBar: {fileID: 2112472381}
+  fillObject: {fileID: 0}
   battleUI: {fileID: 26697474}
   isPlayer: 0
   restart: {fileID: 0}
@@ -28526,9 +28516,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 20
-  healthBar:
-  - {fileID: 0}
-  fillObject: {fileID: 10531364}
+  healthBar: {fileID: 2112472381}
+  fillObject: {fileID: 0}
   battleUI: {fileID: 26697474}
   isPlayer: 0
   restart: {fileID: 0}
