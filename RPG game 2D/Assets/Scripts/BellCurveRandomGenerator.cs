@@ -5,7 +5,6 @@ using UnityEngine;
 public class BellCurveRandomGenerator : MonoBehaviour
 {
     public int sampleCount = 10;
-
     private void Start()
     {
  
@@ -18,7 +17,7 @@ public class BellCurveRandomGenerator : MonoBehaviour
              Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}, Total: {total}");
         } 
     }
-    private int GenerateBellCurveRandom(float min, float max, float peak)
+    public int GenerateBellCurveRandom(float min, float max, float peak)
     {
         float randomValue = Random.Range(0f, 1f);
         if (peak == (min + max) / 2)
