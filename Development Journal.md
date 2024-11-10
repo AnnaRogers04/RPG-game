@@ -1,4 +1,4 @@
-# RPG - Dice
+# RPG
 
 Fundamentals Of Games Development
 
@@ -50,14 +50,13 @@ While his code helped, it took a long time for me to actually read the code due 
 
 ```Markdown
 # Documentation
-I wanted to create a dice generator that has a bell curve and returns values closer to selected devation numbers. For this i used 
-
-
-
-
+I wanted to create a dice generator that has a bell curve and returns values closer to selected devation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
 
 
 # example
+Ask Assad for help 
+
+
 I wanted to create an emitter which takes advantage of spread and focus, which was a technique I learned from a previous assignment where the spatialisation of an object changes depending on distance. I also wanted to work specifically with a `Spline Component` to encapsulate the entire ship with an “Ocean Emitter”. This led me to read the Unreal Blueprints API References and Wwise 3D Positioning documentation (Unreal Engine Blueprint API Reference | Unreal Engine 5.4 Documentation | Epic Developer Community, s.d., AudioKinetic Inc, s.d.).
 
 I found a Blueprint node called “Find Location Closest to World Location" which returns a `Vector3` on the spline position closest to another `Vector3`, I believe this can help move the emitter towards the player(Finding time of given results from (Find Location Closest to World Location) from Splines - Programming & Scripting / Blueprint, 2023).
@@ -65,6 +64,7 @@ I found a Blueprint node called “Find Location Closest to World Location" whic
 I found the Unreal documentation clear and easy to navigate, however it was much harder to find specific nodes unless you are familiar with the naming conventions used by Unreal, such as “World Location” and the API documentation is separated from the property references. The Wwise documentation on the other hand is much easier to navigate as they have core topics such as “Using Sounds and Motion to Enhance Gameplay” and examples of how they can be applied, which the unreal documentation lacked. 
 
 # Example Game Source
+Ask assad for help
 
 Just Cause 3 is an action-adventure game developed by Avalanche Studios, it features a mechanic where the player can navigate the open world with the use of a parachute and a wingsuit(Just Cause 3, 2015).
 
@@ -75,12 +75,14 @@ I found their implementation and choice great for the context of their narrative
 
 ```
 
-## Implementation
+# Implementation
 
-### What was the process of completing the task? What influenced your decision making?
+## What was the process of completing the task? What influenced your decision making?
+When talking about what i liked i mentioned logic, I liked the idea of being able to win something by memory. While making the dice lean towards a number isnt exactly logical it gave the effect i wanted unintentually. 
 
-- What was the process of completing the task at hand? Did you do any initial planning?
-- Did you receive any feedback from users, peers or lecturers? How did you react to it?
+## What was the process of completing the task at hand? Did you do any initial planning?
+I didnt have any initial planning for the dice, i originally struggled with coming up with an idea when it came to starting the game. 
+## Did you receive any feedback from users, peers or lecturers? How did you react to it?
 
 <br>
 
