@@ -1,4 +1,4 @@
-# RPG
+# RPG Game
 
 Fundamentals Of Games Development
 
@@ -6,22 +6,17 @@ Anna Rogers
 
 2315276
 
-## Research
+## Dice Research
 
 ### What sources or references have you identified as relevant to this task?
 
-What type of sources did you identity and want to explore? How would you justify it in reference to the brief set?
-
 - I don't like the luck based aspect of dice.
 - I would like to create dice with returns a more bell curve of values, so it would often be 2-4.
-
-- i found this article https://stackoverflow.com/questions/5816985/random-number-generator-which-gravitates-numbers-to-any-given-number-in-range
-
+- I found this article which explained how to generate a bell curve for random number generation (MikeT, 2015).I used stack overflow as an aid for my Bell Curve code. The user 'Mike T' or 'user735897' was the user that uploaded the code that i used to help me understand the code. The helped me acknowledge that the code i was attempting to use wasn't a bell curve but just a random generator.
+While his code helped, it took a long time for me to actually read the code due to the heavy amounts of over commenting on the script he provided.
 - The document above states that i will create a random generator from 1 to 6 and choose a number for the deviation. that deviation number will determine if it rolls closer to the chosen number or further away.
-
-What type of sources do you want to avoid? How could these kinds of sources be detrimental to the user experience, immersion or implementation?
-
-- I woild like to avoid unity.random as my dice game is using a non-uniform random generator and needs to be able to deviate towards certain numbers.
+- I would like to avoid `Unity.Random` as my dice game is using a non-uniform random generator and needs to be able to deviate towards certain numbers (Technologies, s.d.).
+- I wrote some pseudo to help me understand how to approach this task(What is pseudocode? | Definition from TechTarget, s.d.).
 
 ### Pseudo Code
 ```Plaintext
@@ -30,7 +25,7 @@ To create a non-uniform random generator i need to:
 
 - Create a random generator from 1 to 6, 1 to 12 and 1 to 20
 - Choose a deviation number e.g. 2 for the 1 to 6 dice 
-- Use the bell curve to create the deviation when rolling the dice to break up the "random" aspec of the generator.
+- Use the bell curve to create the deviation when rolling the dice to break up the "random" aspect of the generator.
 - Create an aspect to choose how many dice roll at once for instance:
 if you right click on the dice, the dice rolls.
 - Have a way for the dice to reset after the round set the reset button to restart the code.
@@ -38,82 +33,197 @@ if you right click on the dice, the dice rolls.
 
 ```
 ### Concept
-```
-For my concept I would like to use 2D versions of the dice needed to roll. You click on the dice ans it will roll with the numbers appearing below. There will be a re-roll button on the screen which resets the code.
-Id like to create a labyrinth based 2D game where you come across enemys as you progess. You will roll a dice against all the enemys. An even number means you fight the enemy your up against, an odd number lets you choosse if you fight or flee. Fighting can make you become stronger but if you die your game resets. This game is based on black mirror bandisnatch the netflix playable film.
-```
-#### Sources
 
-https://stackoverflow.com/questions/5816985/    
-I used stack overflow as an aid for my Bell Curve code. The user 'Mike T' or 'user735897' was the user that uploaded the code that i used to help me understand the code. The helped me acknowledge that the code i was attempting to use wasnt a bell curve but just a random generator.
-While his code helped, it took a long time for me to actually read the code due to the heavy amounts of over commenting on the script he provided.
+My original concept for this game was very different from the outcome. Originally i wanted to create a 2D labyrinth game where the fight system depended on on the dice roll. I wanted the dice roll to have a deviation towards a number of my choosing to take away the luck aspect in the game. I was going to base it on the game in the interactive netflix series called black mirror bandisnatch. 
+However, i came to realise this concept was too broad for the time i had to complete it by i changed my idea to simplify it by getting rid of the labyrinth and having the enemies in the open as intractables.
 
-```Markdown
+## The Process
+
+- I started by prototyping a class to randomly generate number.
+
+### BellCurveGenerator.cs
+
+```cs
+public class BellCurveRandomGenerator : MonoBehaviour
+{
+    public int sampleCount = 10;
+    private void Start()
+    {
+ 
+        for (int i = 0; i < sampleCount; i++)
+        {
+             int D6Dice = GenerateBellCurveRandom(1, 6, 2); 
+             int D12Dice = GenerateBellCurveRandom(1, 12, 8);
+             int D20Dice = GenerateBellCurveRandom(1, 20, 12);
+             int total = D6Dice + D12Dice + D20Dice;
+             Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}, Total: {total}");
+        } 
+    }
+    public int GenerateBellCurveRandom(float min, float max, float peak)
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (peak == (min + max) / 2)
+        {
+            randomValue = Mathf.Pow(randomValue, 2);
+        }
+        else
+        {
+            if (randomValue < 0.5f)
+            {
+                randomValue = Mathf.Lerp(min, peak, Mathf.Pow(randomValue * 2f, 2)); 
+            }
+            else
+            {
+                randomValue = Mathf.Lerp(peak, max, Mathf.Pow((randomValue - 0.5f) * 2f, 2));
+            }
+        }
+        int finalValue = Mathf.Clamp(Mathf.RoundToInt(randomValue), Mathf.RoundToInt(min), Mathf.RoundToInt(max));
+
+        return finalValue;
+    }
+}
+```
+- This did not initially work, I was struggling to the understand the concepts and leveraged ChatGPT in order to explain what was going wrong.
+
+### ChatGPT Response
+
+Let’s go through this code step-by-step! This code is a Unity script that simulates rolling different kinds of dice (D6, D12, and D20) but with a "bell curve" effect, meaning the results will be biased toward the average values rather than evenly spread across all possible values.
+
+### 1. **Class Definition and Variables**
+   ```csharp
+   public class BellCurveRandomGenerator : MonoBehaviour
+   {
+       public int sampleCount = 10;
+   ```
+
+   - `BellCurveRandomGenerator` is a class that inherits from `MonoBehaviour`, meaning it’s meant to be attached to a GameObject in Unity.
+   - `sampleCount` is a public integer variable that determines how many times the dice rolls will be simulated (default is 10).
+
+### 2. **`Start` Method**
+   ```csharp
+   private void Start()
+   {
+       for (int i = 0; i < sampleCount; i++)
+       {
+           int D6Dice = GenerateBellCurveRandom(1, 6, 2); 
+           int D12Dice = GenerateBellCurveRandom(1, 12, 8);
+           int D20Dice = GenerateBellCurveRandom(1, 20, 12);
+           int total = D6Dice + D12Dice + D20Dice;
+           Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}, Total: {total}");
+       }
+   }
+   ```
+- The response was somewhat helped to understand the underlying concepts I needed to utilise. However the code generated also did not work the way intended.
+
+## Final Outcomes
+
+### BellCurve.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BellCurveRandomGenerator : MonoBehaviour
+{
+    public int sampleCount = 10;
+    private void Start()
+    {
+ 
+        for (int i = 0; i < sampleCount; i++)
+        {
+             int D6Dice = GenerateBellCurveRandom(1, 6, 2); 
+             int D12Dice = GenerateBellCurveRandom(1, 12, 8);
+             int D20Dice = GenerateBellCurveRandom(1, 20, 12);
+             int total = D6Dice + D12Dice + D20Dice;
+             Debug.Log($"Generated D6: {D6Dice}, D12: {D12Dice}, D20: {D20Dice}, Total: {total}");
+        } 
+    }
+    public int GenerateBellCurveRandom(float min, float max, float peak)
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (peak == (min + max) / 2)
+        {
+            randomValue = Mathf.Pow(randomValue, 2);
+        }
+        else
+        {
+            if (randomValue < 0.5f)
+            {
+                randomValue = Mathf.Lerp(min, peak, Mathf.Pow(randomValue * 2f, 2)); 
+            }
+            else
+            {
+                randomValue = Mathf.Lerp(peak, max, Mathf.Pow((randomValue - 0.5f) * 2f, 2));
+            }
+        }
+        int finalValue = Mathf.Clamp(Mathf.RoundToInt(randomValue), Mathf.RoundToInt(min), Mathf.RoundToInt(max));
+
+        return finalValue;
+    }
+}
+```
+
+- [LINK TO GAME](itchlink)
+- [LINK TO REPOSITORY](gitlink)
+- [LINK TO DEMONSTRATION VIDEO](youtubelink)
+
+- EMBED VIDEO AND WIDGETS HERE
+
+## Reflection
+
+### What Went Well
+Using SoloLearn i furthered my understanding in reading code because of this I was able to write and read code more clearly with less help.
+
+### What Did Not Go Well
+I chose a very broad subject to try a recreate in a short amount of time, because of this my project ended up taking a lot longer then it should have. This left me to partially neglect the rest of my work on other subjects, this left me playing catchup.
+
+### What would you do differently next time?
+Next time I will drastically simplify what i want to create while keeping the code unique. I will focus less on graphics and how the game looks while narrowing the concept. This will give me more time to focus on the code.
+
+
+## Bibliography
+
+MikeT (2015) Answer to ‘Random number generator which gravitates numbers to any given number in range?’ At: https://stackoverflow.com/a/28943782/27932229 (Accessed  15/11/2024).
+
+Technologies, U. (s.d.) Unity - Scripting API: Random.Range. At: https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Random.Range.html (Accessed  15/11/2024).
+
+What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarget.com/whatis/definition/pseudocode (Accessed  15/11/2024).
+
+
+## Declared Assets
+
+
+
 # Documentation
-I wanted to create a dice generator that has a bell curve and returns values closer to selected devation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
+I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
 
 
-# example
-Ask Assad for help 
 
 
-I wanted to create an emitter which takes advantage of spread and focus, which was a technique I learned from a previous assignment where the spatialisation of an object changes depending on distance. I also wanted to work specifically with a `Spline Component` to encapsulate the entire ship with an “Ocean Emitter”. This led me to read the Unreal Blueprints API References and Wwise 3D Positioning documentation (Unreal Engine Blueprint API Reference | Unreal Engine 5.4 Documentation | Epic Developer Community, s.d., AudioKinetic Inc, s.d.).
-
-I found a Blueprint node called “Find Location Closest to World Location" which returns a `Vector3` on the spline position closest to another `Vector3`, I believe this can help move the emitter towards the player(Finding time of given results from (Find Location Closest to World Location) from Splines - Programming & Scripting / Blueprint, 2023).
-
-I found the Unreal documentation clear and easy to navigate, however it was much harder to find specific nodes unless you are familiar with the naming conventions used by Unreal, such as “World Location” and the API documentation is separated from the property references. The Wwise documentation on the other hand is much easier to navigate as they have core topics such as “Using Sounds and Motion to Enhance Gameplay” and examples of how they can be applied, which the unreal documentation lacked. 
-
-# Example Game Source
-Ask assad for help
-
-Just Cause 3 is an action-adventure game developed by Avalanche Studios, it features a mechanic where the player can navigate the open world with the use of a parachute and a wingsuit(Just Cause 3, 2015).
-
-The wind becomes more prominent in the mix and its volume and speed is based on the player's velocity when using the wingsuit or parachute. It is not too overwhelming during action sequences to ensure audio responses can be clearly heard.
-
-I found their implementation and choice great for the context of their narrative and game mechanics. However, for the sequences featured in the assignment, it is more “cinematic” allowing for a different approach for the mix and can be “exaggerated” to drive its narrative function.
-
-
-```
 
 # Implementation
 
 ## What was the process of completing the task? What influenced your decision making?
-When talking about what i liked i mentioned logic, I liked the idea of being able to win something by memory. While making the dice lean towards a number isnt exactly logical it gave the effect i wanted unintentually. 
+When talking about what i liked i mentioned logic, I liked the idea of being able to win something by memory. While making the dice lean towards a number isn't exactly logical it gave the effect i wanted unintentionally. 
 
 ## What was the process of completing the task at hand? Did you do any initial planning?
 I didnt have any initial planning for the dice, i originally struggled with coming up with an idea when it came to starting the game. 
 ## Did you receive any feedback from users, peers or lecturers? How did you react to it?
 
-<br>
-
-```csharp
-using UnityEngine;
-public class HelloWorld : MonoBehaviour 
-{
-    public void Start() 
-    {
-        Debug.Log("Hello World!");
-    }
-}
-```
-*Figure 1. An example of using a script as a figure. This script has a `Start()` method!*
 
 ### What creative or technical approaches did you use or try, and how did this contribute to the outcome?
 
-- Did you try any new software or approaches? How did the effect development?
-
-<br>
-
-![onhover image description](https://beforesandafters.com/wp-content/uploads/2021/05/Welcome-to-Unreal-Engine-5-Early-Access-11-16-screenshot.png)
-*Figure 2. An example of an image as a figure. This image shows where to package your Unreal project!.*
+I used ChatGBT, Github and SoloLearn. ChatGBT and SoloLearn helped massively when it came to understanding and being able to read code. As someone who's new to coding I couldn't recommend this more.
+ChatGBT is a great software, while i still don't fully understand it the aspect of being able to access my game files anywhere is really helpful.
+I would say all of this contributed to the game in a positive way. f
 
 ### Did you have any technical difficulties? If so, what were they and did you manage to overcome them?
 
-- I had issues with the bell curve and it not generating properly.
+When coding i had troubles asking ChatGBT for help. My questions were too broad for it therefore the code it produced wasn't what i wanted and didn't work as intended.
+
 
 ## Outcome
 
-Here you can put links required for delivery of the task, ensure they are properly labelled appropriately and the links function. The required components can vary between tasks, you can find a definative list in the Assessment Information. Images and code snippets can be embedded and annotated if appropriate.
 
 - [Example Video Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)
 - [Example Repo Link](https://github.com/githubtraining/hellogitworld)
@@ -127,33 +237,7 @@ Here you can put links required for delivery of the task, ensure they are proper
 
 *Figure 4. An example of a itch.io widget*
 
-## Critical Reflection
 
-### What did or did not work well and why?
-
-- What did not work well? What parts of the assignment that you felt did not fit the brief or ended up being lacklustre.
-- What did you think went very well? Were there any specific aspects you thought were very good?
-
-### What would you do differently next time?
-
-- Are there any new approaches, methodologies or different software that you wish to incorporate if you have another chance?
-- Is there another aspect you believe should have been the focus?
-
-## Bibliography
-
-- Please use the [harvard referencing convention](https://mylibrary.uca.ac.uk/referencing).
-
-Video game development (2024) In: Wikipedia. At: https://en.wikipedia.org/w/index.php?title=Video_game_development&oldid=1240603537 (Accessed  03/09/2024).
-
-## Declared Assets
-
-- Please use the [harvard referencing convention](https://mylibrary.uca.ac.uk/referencing).
-
-Infinity Blade: Adversaries in Epic Content - UE Marketplace (s.d.) At: https://www.unrealengine.com/marketplace/en-US/product/infinity-blade-enemies (Accessed  09/09/2024).
-
----
-
-```Markdown
 # General Tips
 
 - Use plenty of images and videos to demonstrate your point. You can embed YouTube tutorials, your own recordings, etc.

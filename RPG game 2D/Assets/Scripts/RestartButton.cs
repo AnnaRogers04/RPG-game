@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
     public class Restart : MonoBehaviour
     {
         [SerializeField]private GameObject restartCanvas;
-    	public void RestartGame() {
+    	public void RestartGame() 
+        {
     		SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
             restartCanvas.SetActive(false);
     	}
