@@ -121,6 +121,7 @@ Let’s go through this code step-by-step! This code is a Unity script that simu
    ```
 - The response was somewhat helped to understand the underlying concepts I needed to utilise. However the code generated also did not work the way intended.
 
+
 ## Final Outcomes
 
 ### BellCurve.cs
@@ -391,15 +392,13 @@ Technologies, U. (s.d.) Unity - Scripting API: Random.Range. At: https://docs.un
 What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarget.com/whatis/definition/pseudocode (Accessed  15/11/2024).
 
 
-## Declared Assets
-
-
-
 # Documentation
 I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak
 
-
-
+## Declared assets
+Hero nad Opponents Animation | 2D Characters | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/characters/hero-nad-opponents-animation-140776 (Accessed  29/11/2024).
+Pixel Art Top Down - Basic | 2D Environments | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605 (Accessed  29/11/2024).
+ChatGBT 3.5 script - Bellcurve.cs
 
 
 # Implementation
