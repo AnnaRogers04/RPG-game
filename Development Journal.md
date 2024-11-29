@@ -18,6 +18,8 @@ While his code helped, it took a long time for me to actually read the code due 
 - I would like to avoid `Unity.Random` as my dice game is using a non-uniform random generator and needs to be able to deviate towards certain numbers (Technologies, s.d.).
 - I wrote some pseudo to help me understand how to approach this task(What is pseudocode? | Definition from TechTarget, s.d.).
 
+- research into UI systems to implement a function health bar.
+
 ### Pseudo Code
 ```Plaintext
 
@@ -35,11 +37,15 @@ if you right click on the dice, the dice rolls.
 ### Concept
 
 My original concept for this game was very different from the outcome. Originally i wanted to create a 2D labyrinth game where the fight system depended on on the dice roll. I wanted the dice roll to have a deviation towards a number of my choosing to take away the luck aspect in the game. I was going to base it on the game in the interactive netflix series called black mirror bandisnatch. 
-However, i came to realise this concept was too broad for the time i had to complete it by i changed my idea to simplify it by getting rid of the labyrinth and having the enemies in the open as intractables.
+However, i came to realise this concept was too broad for the time i had to complete it by i changed my idea to simplify it by getting rid of the labyrinth and having the enemies in the open as intractable.
 
 ## The Process
 
-- I started by prototyping a class to randomly generate number.
+- I started by prototyping a class to randomly generate numbers.
+- I added the deviation to the random generator making a bell curve that leans towards a number I chose.
+- I used this generator to create a battle loop where the random generator is the attack damage.
+- implement tile based system, however collisions did not work.
+
 
 ### BellCurveGenerator.cs
 
@@ -162,20 +168,215 @@ public class BellCurveRandomGenerator : MonoBehaviour
     }
 }
 ```
+### BattleSystem.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BattleSystem : MonoBehaviour
+{
+    public Health playerHealth, enemyHealth;
+    public BellCurveRandomGenerator bcrg;
+    public void SetEnemyTarget(Health newEnemy) => enemyHealth = newEnemy;
+
+
+    public void Battle()
+    {
+        enemyHealth.TakeDamage(bcrg.GenerateBellCurveRandom(1, 6, 3));
+        playerHealth.TakeDamage(bcrg.GenerateBellCurveRandom(1, 6, 4));
+    }
+}
+```
+
+### Enemy.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using Unity.UI;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Enemy : MonoBehaviour
+{
+    public BattleSystem bs;
+    public Sprite enemyImg;
+    public Image image;
+    private Health _health;
+    private GameObject battleUI;
+
+    private BattleSystem battleSystem;
+
+    [SerializeField]private Slider battleSlider;
+    private void Start()
+    {
+        battleSystem = GameObject.FindGameObjectWithTag("BattleSystem").GetComponent<BattleSystem>();
+        _health = GetComponent<Health>();
+        battleUI = image.gameObject;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Triggered No Work I Guess");
+        if(other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Triggered");
+            bs.enemyHealth = _health;
+            image.sprite = enemyImg;
+            battleUI.SetActive(true);
+            _health.healthBar = battleSlider;
+            _health.ResetHealth();
+            battleSystem.enemyHealth = _health;
+        }
+    }
+}
+```
+### Health.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Health : MonoBehaviour
+{
+    public float currentHealth, maxHealth = 100f;
+    public Slider healthBar;
+    public GameObject fillObject;
+    public GameObject battleUI;
+
+    [SerializeField]private bool isPlayer;
+    [SerializeField]private Restart restart;
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+        if(healthBar == null) return;
+        healthBar.value = currentHealth / maxHealth;
+    }    
+
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0) Die();
+        healthBar.value = currentHealth / maxHealth;
+    }
+
+    public void AddHealth(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        healthBar.value = currentHealth / maxHealth;
+    }
+
+    private void Die()
+    {
+        //fillObject.SetActive(false);
+        battleUI.SetActive(false);
+    }
+
+    public void ResetHealth()
+    {
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        healthBar.value = currentHealth / maxHealth;
+    }
+
+    private void Update()
+    {
+        if(isPlayer == false) return;
+
+        if(currentHealth <= 0)
+        {
+            restart.RestartGame();
+        }
+    }
+
+}
+```
+### PlayerMovement.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float speed = 1.5f;
+
+    public SpriteRenderer spriteRenderer;
+    public Animator PlayerAnim;
+    public string ParameterName;
+
+    private void Update()
+    {
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(moveX, moveY, 0);
+        transform.position += movement * speed * Time.deltaTime;
+
+        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+             PlayerAnim.SetBool(ParameterName, true);
+        }
+        else
+        {
+             PlayerAnim.SetBool(ParameterName, false);
+        }
+        if(Input.GetAxis("Horizontal") >= 0 )
+        {
+             spriteRenderer.flipX = false;
+        }
+         if(Input.GetAxis("Horizontal") <= 0 )
+        {
+             spriteRenderer.flipX = true;
+        }
+
+
+```
+### RestartButton.cs
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+    
+    public class Restart : MonoBehaviour
+    {
+        [SerializeField]private GameObject restartCanvas;
+    	public void RestartGame() 
+        {
+    		SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+            restartCanvas.SetActive(false);
+    	}
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                restartCanvas.SetActive(!restartCanvas.activeSelf);
+            }
+        }
+    }
+
+```
 
 - [LINK TO GAME](itchlink)
-- [LINK TO REPOSITORY](gitlink)
+- [https://github.com/AnnaRogers04/RPG-game](gitlink)
 - [LINK TO DEMONSTRATION VIDEO](youtubelink)
 
-- EMBED VIDEO AND WIDGETS HERE
+
 
 ## Reflection
 
 ### What Went Well
 Using SoloLearn i furthered my understanding in reading code because of this I was able to write and read code more clearly with less help.
+- it was my first proper game project, it is a large achievement to get something finished.
 
 ### What Did Not Go Well
 I chose a very broad subject to try a recreate in a short amount of time, because of this my project ended up taking a lot longer then it should have. This left me to partially neglect the rest of my work on other subjects, this left me playing catchup.
+- time management was an issue.
+- i struggled with focus due to being overwhelmed with the large amount of projects.
 
 ### What would you do differently next time?
 Next time I will drastically simplify what i want to create while keeping the code unique. I will focus less on graphics and how the game looks while narrowing the concept. This will give me more time to focus on the code.
@@ -195,7 +396,7 @@ What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarg
 
 
 # Documentation
-I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
+I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak
 
 
 
@@ -207,7 +408,7 @@ I wanted to create a dice generator that has a bell curve and returns values clo
 When talking about what i liked i mentioned logic, I liked the idea of being able to win something by memory. While making the dice lean towards a number isn't exactly logical it gave the effect i wanted unintentionally. 
 
 ## What was the process of completing the task at hand? Did you do any initial planning?
-I didnt have any initial planning for the dice, i originally struggled with coming up with an idea when it came to starting the game. 
+I didn't have any initial planning for the dice, i originally struggled with coming up with an idea when it came to starting the game. 
 ## Did you receive any feedback from users, peers or lecturers? How did you react to it?
 
 
@@ -222,32 +423,4 @@ I would say all of this contributed to the game in a positive way. f
 When coding i had troubles asking ChatGBT for help. My questions were too broad for it therefore the code it produced wasn't what i wanted and didn't work as intended.
 
 
-## Outcome
 
-
-- [Example Video Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)
-- [Example Repo Link](https://github.com/githubtraining/hellogitworld)
-- [Example Build Link](https://samperson.itch.io/desktop-goose)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=C4v0qHaYuEISAC01" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-*Figure 3. An example of an embedded video using a HTML code snippet.*
-
-<iframe frameborder="0" src="https://itch.io/embed/2374819" width="552" height="167"><a href="https://bitboyb.itch.io/nephilim-resurrection">Nephilim Resurrection (BETA) by bitboyb</a></iframe>
-
-*Figure 4. An example of a itch.io widget*
-
-
-# General Tips
-
-- Use plenty of images and videos to demonstrate your point. You can embed YouTube tutorials, your own recordings, etc.
-- Always reference! Even documentation, tutorials and anything you used for your assignment. Use an inline reference for the sentence and a bibliography reference at the end.
-- Word count is not important, you can also chose to use bullet points. As long as it is clear and readable, the format your decide to use can be flexible.
-- You are free to use AI but please ensure you have made a note in the declared assets, for example if you have a script called Test.cs , you should note that AI was used to in the creation of this script. You can use a bullet point list for each asset used like:
-
-The following assets were created or modified with the use of GPT 4o:
-- Test.cs
-- AnotherScript.cs
-- Development Journal.html
-
-```
