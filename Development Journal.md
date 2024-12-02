@@ -362,9 +362,10 @@ using UnityEngine.SceneManagement;
 
 ```
 
-- [LINK TO GAME](itchlink)
-- [https://github.com/AnnaRogers04/RPG-game](gitlink)
-- [LINK TO DEMONSTRATION VIDEO](youtubelink)
+
+- [https://lunarlynx-games.itch.io/rollquest](itchlink)
+- [https://github.com/AnnaRogers04](gitlink)
+- [https://youtu.be/_V-dt0JOJTU?si=6-LwRPRocS8P6i0_](youtubelink)
 
 
 
