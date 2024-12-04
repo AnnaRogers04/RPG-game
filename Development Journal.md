@@ -394,7 +394,7 @@ What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarg
 
 
 # Documentation
-I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak
+I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
 
 ## Declared assets
 Hero nad Opponents Animation | 2D Characters | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/characters/hero-nad-opponents-animation-140776 (Accessed  29/11/2024).
@@ -410,7 +410,7 @@ When talking about what i liked i mentioned logic, I liked the idea of being abl
 ## What was the process of completing the task at hand? Did you do any initial planning?
 I didn't have any initial planning for the dice, i originally struggled with coming up with an idea when it came to starting the game. 
 ## Did you receive any feedback from users, peers or lecturers? How did you react to it?
-
+The feedback I got for this project was to focus less on the graphics. The graphics had roped me into a spiral where it consumed me and i couldn't focus on any of the code for the game.
 
 ### What creative or technical approaches did you use or try, and how did this contribute to the outcome?
 
