@@ -363,9 +363,9 @@ using UnityEngine.SceneManagement;
 ```
 
 
-- [https://lunarlynx-games.itch.io/rollquest](itchlink)
-- [https://github.com/AnnaRogers04](gitlink)
-- [https://youtu.be/_V-dt0JOJTU?si=6-LwRPRocS8P6i0_](youtubelink)
+- [itchlink](https://lunarlynx-games.itch.io/rollquest)
+- [gitlink](https://github.com/AnnaRogers04)
+- [youtubelink](https://youtu.be/_V-dt0JOJTU?si=6-LwRPRocS8P6i0_)
 
 
 
@@ -383,24 +383,8 @@ I chose a very broad subject to try a recreate in a short amount of time, becaus
 ### What would you do differently next time?
 Next time I will drastically simplify what i want to create while keeping the code unique. I will focus less on graphics and how the game looks while narrowing the concept. This will give me more time to focus on the code.
 
-
-## Bibliography
-
-MikeT (2015) Answer to ‘Random number generator which gravitates numbers to any given number in range?’ At: https://stackoverflow.com/a/28943782/27932229 (Accessed  15/11/2024).
-
-Technologies, U. (s.d.) Unity - Scripting API: Random.Range. At: https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Random.Range.html (Accessed  15/11/2024).
-
-What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarget.com/whatis/definition/pseudocode (Accessed  15/11/2024).
-
-
 # Documentation
 I wanted to create a dice generator that has a bell curve and returns values closer to selected deviation number. For this I created a random generator for the D6, D12 and D20 dice and then added a peak which is the bell curve. I used Mathf.Lerp to help calculate between the min and peak and the max and peak.
-
-## Declared assets
-Hero nad Opponents Animation | 2D Characters | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/characters/hero-nad-opponents-animation-140776 (Accessed  29/11/2024).
-Pixel Art Top Down - Basic | 2D Environments | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605 (Accessed  29/11/2024).
-ChatGBT 3.5 script - Bellcurve.cs
-
 
 # Implementation
 
@@ -421,6 +405,19 @@ I would say all of this contributed to the game in a positive way. f
 ### Did you have any technical difficulties? If so, what were they and did you manage to overcome them?
 
 When coding i had troubles asking ChatGBT for help. My questions were too broad for it therefore the code it produced wasn't what i wanted and didn't work as intended.
+
+## Bibliography
+
+MikeT (2015) Answer to ‘Random number generator which gravitates numbers to any given number in range?’ At: https://stackoverflow.com/a/28943782/27932229 (Accessed  15/11/2024).
+
+Technologies, U. (s.d.) Unity - Scripting API: Random.Range. At: https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Random.Range.html (Accessed  15/11/2024).
+
+What is pseudocode? | Definition from TechTarget (s.d.) At: https://www.techtarget.com/whatis/definition/pseudocode (Accessed  15/11/2024).
+
+## Declared assets
+Hero nad Opponents Animation | 2D Characters | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/characters/hero-nad-opponents-animation-140776 (Accessed  29/11/2024).
+Pixel Art Top Down - Basic | 2D Environments | Unity Asset Store (s.d.) At: https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605 (Accessed  29/11/2024).
+ChatGBT 3.5 script - Bellcurve.cs
 
 
 
